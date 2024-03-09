@@ -32,8 +32,12 @@ class Level1 extends StatelessWidget {
   final String txtdata;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Level2(txtdata),
+    return Column(
+      children: [
+        Text('Level1'),
+        Text(Provider.of<Data>(context).data),
+        Level2(txtdata),
+      ],
     );
   }
 }
@@ -45,7 +49,9 @@ class Level2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Text('Level2'),
         MyTextField(),
+        Text(Provider.of<Data>(context).data),
         Level3(txtdata),
       ],
     );
@@ -59,6 +65,7 @@ class Level3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Column(
       children: [
+        Text('Level3'),
         Text(Provider.of<Data>(context).data),
         Text(txtdata),
       ],
