@@ -9,13 +9,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<Data>(
-      builder: (context) => Data(),
+      create: (_) => Data(),
+      // builder: (context) => Data(),
       child: MaterialApp(
         home: Scaffold(
           appBar: AppBar(
             title: MyText(),
           ),
-          body: Level1(txtdata),
+          body: Column(
+            children: [
+              Level1(txtdata),
+            ],
+          ),
         ),
       ),
     );
@@ -52,7 +57,12 @@ class Level3 extends StatelessWidget {
   final String txtdata;
   @override
   Widget build(BuildContext context) {
-    return Text(Provider.of<Data>(context).data);
+    return  Column(
+      children: [
+        Text(Provider.of<Data>(context).data),
+        Text(txtdata),
+      ],
+    );
   }
 }
 
@@ -68,14 +78,14 @@ class MyTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       onChanged: (newText) {
-        Provider.of<Data>(context).changeString(newText);
+        Provider.of<Data>(context, listen:  false).changeString(newText);
       },
     );
   }
 }
 
 class Data extends ChangeNotifier {
-  String data = 'Some data';
+  String data = 'Some data test';
 
   void changeString(String newString) {
     data = newString;
